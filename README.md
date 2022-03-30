@@ -1,7 +1,40 @@
 # Deploy a High-Availability Web App using CloudFormation
 
 Dummy Application deployed on based network infrastructure (defined in network.yml). 
+
 The application is accessible via load balancer port 80, no public access to Instance.
+
+## Diagram
+![Blank diagram](https://user-images.githubusercontent.com/56160926/160891127-116e7b7c-78ef-4572-8200-bd444a304904.png)
+
+## File structure
+### network.yml
+  - Define base network, including:
+    - VPC
+    - Internet Gateway
+    - 2 Public Subnet
+    - 2 Private Subnet
+    - 2 NAT Gateway 
+    - 2 Elastic IP for each NAT gateway
+    - Public Route Table, route to IGW
+    - Private Route Table, route to NAT gateway
+    
+### servers.yml
+  - Define server which host the web application, including:
+    - Web Server Security Group with port 80 open for ingress
+    - Launch Configuration
+    - Auto Scaling Group
+    - Target Group to port 80 on ASG
+    - Load Balancer to access the application
+    - LB Security Group with ingress from port 80 to 80
+    - Listener on port 80
+
+### create.sh, delete.sh, update.sh
+  - Perform create, delete, update stack action respectively
+  - Usage:
+    - ./create.sh <stack_name> <template.yml> <parameters.json>
+    - ./update.sh <stack_name> <template.yml> <parameters.json>
+    - ./delete.sh <stack_name>
 
 ## The Basics
 
