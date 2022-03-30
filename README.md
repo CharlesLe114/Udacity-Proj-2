@@ -45,9 +45,12 @@ The application is accessible via load balancer port 80, no public access to Ins
 <img width="203" alt="image" src="https://user-images.githubusercontent.com/56160926/160774335-636039a1-c586-43af-b2d5-70396bec266c.png">
 
 ### Outputs
+http://webse-WebAp-3O95HDNQHGBZ-1907323451.us-east-1.elb.amazonaws.com
+
 <img width="325" alt="image" src="https://user-images.githubusercontent.com/56160926/160774406-0ad5d606-2acb-4e62-abc5-f74a8a8056cd.png">
 
 ### Working Test
+<img width="1347" alt="image" src="https://user-images.githubusercontent.com/56160926/160893289-e26e3133-29aa-429c-8331-fbeda37d4821.png">
 
 ## Load Balancer
 
