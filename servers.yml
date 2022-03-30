@@ -21,16 +21,13 @@ Parameters:
     MaxInstanceNumber:
       Description: Maximum amount of instances create by Auto Scaling
       Type: String
-    HomeIp:
-      Description: my changing ip
-      Type: String
 
 Resources:
 ##### Web App Server Resources
   WebServerSecGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Allow http to our hosts and SSH from local only
+      GroupDescription: Allow http to hosts
       VpcId:
         Fn::ImportValue:
           !Sub "${EnvironmentName}-VPCID"
@@ -38,10 +35,6 @@ Resources:
       - IpProtocol: tcp
         FromPort: 80
         ToPort: 80
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
         CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
       - IpProtocol: tcp
@@ -61,7 +54,6 @@ Resources:
           echo "it works! Udagram, Udacity" > index.html 
       # ToDo: AMI ID of Ubuntu Linux machine. Too get one, try creating a VM from the web console. 
       ImageId: !Ref ImageId
-      KeyName: learningKey
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: !Ref InstanceType
@@ -96,17 +88,6 @@ Resources:
       VpcId: 
         Fn::ImportValue:
           Fn::Sub: "${EnvironmentName}-VPCID"
-
-  JumpboxServerInstance: 
-    Type: AWS::EC2::Instance
-    Properties: 
-      ImageId: "ami-0c02fb55956c7d316"
-      KeyName: "jumpbox"
-      SecurityGroupIds: 
-        - !Ref JumpboxServerSecGroup
-      SubnetId: 
-        Fn::ImportValue:
-          !Sub "${EnvironmentName}-PUB1-SN"
 ##### Load balancer
   LBSecGroup:
     Type: AWS::EC2::SecurityGroup
@@ -159,4 +140,3 @@ Outputs:
   LoadBalancerDNSName:
     Description: The DNSName load balancer
     Value: !GetAtt WebAppLB.DNSName
-
