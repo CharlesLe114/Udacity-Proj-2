@@ -1,5 +1,8 @@
 # Deploy a High-Availability Web App using CloudFormation
 
+Dummy Application deployed on based network infrastructure (defined in network.yml). 
+The application is accessible via load balancer port 80, no public access to Instance.
+
 ## The Basics
 
 ### Parameters
